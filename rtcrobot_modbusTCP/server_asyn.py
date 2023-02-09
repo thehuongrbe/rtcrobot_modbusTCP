@@ -69,7 +69,10 @@ class ModbusTCP(Node):
                 "MajorMinorRevision": version.short(),
             }
         )
-        
+        self.server = self.run_server()
+        # asyncio.run(self.handle_server)
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.handle_server())
     async def handle_server(self):
         
         try:
